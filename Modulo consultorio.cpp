@@ -4,6 +4,8 @@
 #include <locale.h>
 #include <windows.h>
 #include <iostream>
+#include <time.h>
+using namespace std;
 
 void toSpanish() {
 	setlocale(LC_ALL, "spanish");
@@ -12,16 +14,21 @@ void toSpanish() {
 }
 
 void printing() {
-	printf("Modulo Consultorio Veterinario\n");
-	printf("=========================\n\n");
-	printf("1.- Iniciar Sesión\n");
-	printf("2.- Visualizar Lista de Espera de Turnos (informe)\n");
-	printf("3.- Registrar Evolución de la Mascota\n\n");
-	printf("4.- Cerrar la aplicación.\n\n");
-	printf("Ingrese una opción:\n");
+	printf("\n\n----------------------------------------------------------------------------\n\n\n");
+	printf("*-*-*-*-*-*-                 Modulo Consultorio                 -*-*-*-*-*-*\n\n\n");
+	printf("----------------------------------------------------------------------------\n\n\n\n");
+	printf("[1] --> Iniciar Sesión\n");
+	printf("[2] --> Visualizar Lista de Espera de Turnos (informe)\n");
+	printf("[3] --> Registrar Evolución de la Mascota\n\n");
+	printf("[4] --> Cerrar la aplicación.\n\n");
+	printf("Ingrese una opción: ");
 }
 
 void menu();
+void inicS();
+void visL();
+void evol();
+void exit();
 
 int opc=0;
 int err=0;
@@ -36,13 +43,7 @@ void menu() {
 	srand(time(NULL));
 	do {
 		system("cls");
-		printf("\n\n----------------------------------------------------------------------------\n\n\n");
-		printf("*-*-*-*-*-*-  Bienvenido a la consola de juegos del grupo 1JK6  -*-*-*-*-*-*\n\n\n");
-		printf("----------------------------------------------------------------------------\n\n\n\n");
-		printf("**Puntaje Global: %d pts**", puntaje);
-		printf("\n\n\n\nSeleccione la categoria de juego con el que le gustaria comenzar:\n\n");
-		printf("[1] --> Juegos numericos\n[2] --> Juegos de letras\n\n[0] --> Salir");
-		printf("\n\nSeleccionar: ");
+		printing();
 		err = 0;
 		if(!(cin >> opc)) {
 			cin.clear();
@@ -55,11 +56,12 @@ void menu() {
 			system("pause");
 		}
 		if(err == 0) {
-			if(opc == 1 || opc == 2 || opc == 0) {
+			if(opc == 1 || opc == 2 || opc == 3 || opc == 4) {
 				err = 0;
-				if(opc == 1) menuNumeros();
-				if(opc == 2) menuLetras();
-				if(opc == 0) terminar();
+				if(opc == 1) inicS();
+				if(opc == 2) visL();
+				if(opc == 3) visL();
+				if(opc == 4) exit();
 				opc = 500;
 			} else {
 				system("cls");
@@ -71,4 +73,18 @@ void menu() {
 			}
 		}
 	} while(err == 1);
+}
+
+void inicS() {}
+
+void visL() {}
+
+void evol() {}
+
+void exit() {
+	system("cls");
+	printf("\n\n\n\n---------------------------------------------------------------\n\n\n");
+	printf("*-*-*-*-*-*-           Fin del Programa            -*-*-*-*-*-*\n\n\n");
+	printf("---------------------------------------------------------------\n\n\n\n\n\n");
+	system("pause");
 }
