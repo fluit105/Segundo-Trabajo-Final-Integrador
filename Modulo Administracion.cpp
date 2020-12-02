@@ -70,7 +70,7 @@ void menu() {
 			system("pause");
 		}
 		if(err == 0) {
-			if(opc == 1 || opc == 2 || opc == 3 || opc == 4 || opc == 5) {
+			if(opc == 1 || opc == 2 || opc == 3 || opc == 4) {
 				err = 0;
 				if(opc == 1) rVet();
 				if(opc == 2) rAsi();
@@ -153,15 +153,29 @@ void rAsi() {
 				printf("**************************************************************************\n\n\n\n\n");
 				system("pause");
 			} else {
-				if(isupper(usr.usrID[0])) {
+				if(isupper(usr.usrID[0]) || isdigit(usr.usrID[0])) {
 					err = 1;
 					system("cls");
 					printf("\n\n\n**************************************************************************\n");
-					printf("--> ERROR: El ID de usuario debe empezar con letra minuscula\n");
+					printf("--> ERROR: El ID de usuario debe empezar con una letra minuscula\n");
 					printf("**************************************************************************\n\n\n\n\n");
 					system("pause");
 				} else {
-					
+					int uppers=0;
+					for (int i = 0; i < 10; i++) {
+						if(isupper(usr.usrID[i]) && isalpha(usr.usrID[i])) {
+							uppers++;
+						}
+					}
+					printf("%d", uppers);
+					if(uppers < 2) {
+						err = 1;
+						system("cls");
+						printf("\n\n\n**************************************************************************\n");
+						printf("--> ERROR: El ID de usuario debe de tener al menos dos letras mayusculas\n");
+						printf("**************************************************************************\n\n\n\n\n");
+						system("pause");
+					}
 				}
 			}
 			
