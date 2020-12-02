@@ -13,22 +13,13 @@ void toSpanish() {
     SetConsoleOutputCP(1252);
 }
 
-void printing() {
-	printf("\n\n----------------------------------------------------------------------------\n\n\n");
-	printf("*-*-*-*-*-*-               Modulo Administracion                -*-*-*-*-*-*\n\n\n");
-	printf("----------------------------------------------------------------------------\n\n\n\n");
-	printf("[1] --> Registrar Veterinario\n");
-	printf("[2] --> Registrar Usuario Asistente\n");
-	printf("[3] --> Atenciones por Veterinarios\n\n");
-	printf("[4] --> Cerrar la aplicación.\n\n");
-	printf("Ingrese una opción: ");
-}
-
 void menu();
 void rVet();
 void rAsi();
 void atenV();
 void exit();
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 struct veterin {
 	char apeNom[50];
@@ -45,6 +36,7 @@ struct user {
 
 int opc=0;
 int err=0;
+
 FILE *vets;
 FILE *users;
 
@@ -58,7 +50,14 @@ void menu() {
 	srand(time(NULL));
 	do {
 		system("cls");
-		printing();
+		printf("\n\n----------------------------------------------------------------------------\n\n\n");
+		printf("*-*-*-*-*-*-               Modulo Administracion                -*-*-*-*-*-*\n\n\n");
+		printf("----------------------------------------------------------------------------\n\n\n\n");
+		printf("[1] --> Registrar Veterinario\n");
+		printf("[2] --> Registrar Usuario Asistente\n");
+		printf("[3] --> Atenciones por Veterinarios\n\n");
+		printf("[4] --> Cerrar la aplicación.\n\n");
+		printf("Ingrese una opción: ");
 		err = 0;
 		if(!(cin >> opc)) {
 			cin.clear();
@@ -119,7 +118,69 @@ void rVet() {
 	menu();
 }
 
-void rAsi() {}
+void rAsi() {
+	system("cls");
+	users = fopen("Usuarios.dat","a+b");
+	if (users == NULL) {
+		printf ("ERROR: No se pudo abrir el archivo");
+	} else {
+		user usr;
+		do {
+			err = 0;
+			system("cls");
+			printf("\n\n----------------------------------------------------------------------------\n\n\n");
+			printf("*-*-*-*-*-*-            Registro de nuevo Asistente             -*-*-*-*-*-*\n\n\n");
+			printf("----------------------------------------------------------------------------\n\n\n\n");
+			SetConsoleTextAttribute(hConsole, 15);
+			printf("-->Ingrese el ID de usuario<--\n\n");
+			SetConsoleTextAttribute(hConsole, 8);
+			printf("Formato\n");
+			printf("-No ser repetido\n");
+			printf("-Entre 6 y 10 caracteres de largo\n");
+			printf("-Empezar con letra minuscula\n");
+			printf("-Poseer al menos dos letras mayusculas\n");
+			printf("-No tener mas de 3 digitos\n\n");
+			SetConsoleTextAttribute(hConsole, 15);
+			printf("-Entrada: ");
+			_flushall();
+			gets(usr.usrID);
+		
+			if(strlen(usr.usrID) > 10 || strlen(usr.usrID) < 6) {
+				err = 1;
+				system("cls");
+				printf("\n\n\n**************************************************************************\n");
+				printf("--> ERROR: El ID de usuario debe tener un largo de entre 6 y 10 caracteres\n");
+				printf("**************************************************************************\n\n\n\n\n");
+				system("pause");
+			} else {
+				if(isupper(usr.usrID[0])) {
+					err = 1;
+					system("cls");
+					printf("\n\n\n**************************************************************************\n");
+					printf("--> ERROR: El ID de usuario debe empezar con letra minuscula\n");
+					printf("**************************************************************************\n\n\n\n\n");
+					system("pause");
+				} else {
+					
+				}
+			}
+			
+			
+		
+		} while (err == 1);
+		
+		
+		printf("Ingrese una contraseña: ");
+		scanf("%d", &usr.password);
+		printf("Ingrese el apellido y nombre: ");
+		scanf("%d", &usr.name); 
+		fwrite(&usr, sizeof(user), 1, vets);
+	}
+	fclose(vets);
+	printf("\n\n");
+	system("pause");
+	menu();
+}
 
 void atenV() {}
 
