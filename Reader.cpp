@@ -15,7 +15,7 @@ void toSpanish() {
 
 void printing() {
 	printf("\n\n----------------------------------------------------------------------------\n\n\n");
-	printf("*-*-*-*-*-*-               Modulo Administracion                -*-*-*-*-*-*\n\n\n");
+	printf("*-*-*-*-*-*-               READER                -*-*-*-*-*-*\n\n\n");
 	printf("----------------------------------------------------------------------------\n\n\n\n");
 	printf("[1] --> Ver Veterinarios.dat\n");
 	printf("[2] --> Ver Usuarios.dat\n\n");
