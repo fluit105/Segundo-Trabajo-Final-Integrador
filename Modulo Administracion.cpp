@@ -162,17 +162,28 @@ void rAsi() {
 					system("pause");
 				} else {
 					int uppers=0;
+					int digits=0;
 					for (int i = 0; i < 10; i++) {
 						if(isupper(usr.usrID[i]) && isalpha(usr.usrID[i])) {
 							uppers++;
 						}
+						if(isdigit(usr.usrID[i])) {
+							digits++;
+						}
 					}
-					printf("%d", uppers);
 					if(uppers < 2) {
 						err = 1;
 						system("cls");
 						printf("\n\n\n**************************************************************************\n");
 						printf("--> ERROR: El ID de usuario debe de tener al menos dos letras mayusculas\n");
+						printf("**************************************************************************\n\n\n\n\n");
+						system("pause");
+					}
+					if(digits > 3) {
+						err = 1;
+						system("cls");
+						printf("\n\n\n**************************************************************************\n");
+						printf("--> ERROR: El ID de usuario no puede tener más de 3 digitos\n");
 						printf("**************************************************************************\n\n\n\n\n");
 						system("pause");
 					}
