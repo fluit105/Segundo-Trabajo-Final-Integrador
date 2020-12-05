@@ -36,7 +36,7 @@ struct veterin {
 };
 
 struct user {
-	char usrID[50];
+	char usrID[10];
 	char password[32];
 	char name[50];
 };
@@ -116,7 +116,34 @@ void rVet() {
 	menu();
 }
 
-void rUsr() {}
+void rUsr() {
+	system("cls");
+	users = fopen("Usuarios.dat","r+b");
+	if (users == NULL) {
+		printf ("ERROR: No se pudo abrir el archivo");
+	} else {
+		printf("\n\n----------------------------------------------------------------------------\n\n\n");
+		printf("*-*-*-*-*-*-            Archivo de Usuarios             -*-*-*-*-*-*\n\n\n");
+		printf("----------------------------------------------------------------------------\n\n\n\n");
+		user usr;
+		rewind(users);
+		fread(&usr, sizeof(user), 1, users);
+		while(!feof(users)) {
+			printf("ID de usuario: ");
+			puts(usr.usrID);
+			printf("Contraseña: ");
+			puts(usr.password);
+			printf("Apellido y Nombre: ");
+			puts(usr.name);
+			fread(&usr, sizeof(user), 1, users);
+			printf("\n\n");
+		}
+	}
+	fclose(users);
+	printf("\n\n");
+	system("pause");
+	menu();
+}
 
 void exit() {
 	system("cls");
