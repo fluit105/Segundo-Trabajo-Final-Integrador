@@ -29,7 +29,7 @@ struct veterin {
 };
 
 struct user {
-	char usrID[50];
+	char usrID[10];
 	char password[32];
 	char name[50];
 };
@@ -49,6 +49,8 @@ void menu() {
 	system("color 0f");
 	srand(time(NULL));
 	do {
+		opc = 500;
+		
 		system("cls");
 		printf("\n\n----------------------------------------------------------------------------\n\n\n");
 		printf("*-*-*-*-*-*-               Modulo Administracion                -*-*-*-*-*-*\n\n\n");
@@ -163,7 +165,7 @@ void rAsi() {
 				} else {
 					int uppers=0;
 					int digits=0;
-					for (int i = 0; i < 10; i++) {
+					for (int i = 0; i < strlen(usr.usrID); i++) {
 						if(isupper(usr.usrID[i]) && isalpha(usr.usrID[i])) {
 							uppers++;
 						}
@@ -171,6 +173,7 @@ void rAsi() {
 							digits++;
 						}
 					}
+					int allow = 0;
 					if(uppers < 2) {
 						err = 1;
 						system("cls");
@@ -178,6 +181,8 @@ void rAsi() {
 						printf("--> ERROR: El ID de usuario debe de tener al menos dos letras mayusculas\n");
 						printf("**************************************************************************\n\n\n\n\n");
 						system("pause");
+					} else {
+						allow++;
 					}
 					if(digits > 3) {
 						err = 1;
@@ -186,24 +191,57 @@ void rAsi() {
 						printf("--> ERROR: El ID de usuario no puede tener más de 3 digitos\n");
 						printf("**************************************************************************\n\n\n\n\n");
 						system("pause");
+					} else {
+						allow++;
+					}
+					if(allow == 2) {
+						rewind(users);
+						user aux;
+						fread(&aux, sizeof(user), 1, users);
+						while(!feof(users)) {
+							if(strcmp(usr.usrID, aux.usrID) == 0) {
+								err = 1;
+								system("cls");
+								printf("\n\n\n**************************************************************************\n");
+								printf("--> ERROR: El ID de usuario ingresado ya existe\n");
+								printf("**************************************************************************\n\n\n\n\n");
+								system("pause");
+							}
+							fread(&aux, sizeof(user), 1, users);
+						}
+					}
+					if(err == 0) {
+						for (int i = 0; i < strlen(usr.usrID); i++) {
+							if(isalnum(usr.usrID[i]) || isupper(usr.usrID[i]) || usr.usrID[i] == '+' || usr.usrID[i] == '-' || usr.usrID[i] == '/' || usr.usrID[i] == '*' || usr.usrID[i] == '?' || usr.usrID[i] == '¿' || usr.usrID[i] == '!' || usr.usrID[i] == '¡') {
+								
+							} else {
+								err = 1;
+								system("cls");
+								printf("\n\n\n*******************************************************************************\n");
+								printf("--> ERROR: El ID de usuario solo admite los siguiente simbolos: +,-,/,*,?,¿,!,¡\n");
+								printf("*******************************************************************************\n\n\n\n\n");
+								system("pause");
+								break;
+							}
+						}
+						
 					}
 				}
 			}
-			
-			
-		
 		} while (err == 1);
 		
-		
-		printf("Ingrese una contraseña: ");
-		scanf("%d", &usr.password);
+		printf("\nIngrese una contraseña: ");
+		_flushall();
+		gets(usr.password);
 		printf("Ingrese el apellido y nombre: ");
-		scanf("%d", &usr.name); 
-		fwrite(&usr, sizeof(user), 1, vets);
+		_flushall();
+		gets(usr.name); 
+		fwrite(&usr, sizeof(user), 1, users);
 	}
-	fclose(vets);
+	fclose(users);
 	printf("\n\n");
 	system("pause");
+	_flushall();
 	menu();
 }
 
