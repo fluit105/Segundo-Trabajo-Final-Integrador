@@ -44,11 +44,11 @@ struct fecha {
 struct mascs {
 	char apeNom[50];
 	char domicilio[50];
-	int dniD;
+	int dni;
 	char localidad[50];
 	fecha nacimiento;
 	float peso;
-	char tel[15];m
+	char telefono[15];
 };
 
 int opc=0;
@@ -196,7 +196,7 @@ void inicS() {
 void regM() {
 	
 //////////	BORRAR!!!! ////////////////////
-logged = true;
+//logged = true;
 //////////	BORRAR!!!! ////////////////////
 	
 	if(logged) {
@@ -205,14 +205,14 @@ logged = true;
 		if (mascots == NULL) {
 			printf ("ERROR: No se pudo abrir el archivo");
 		} else {
-//			veterin vet;
+			mascs masc;
 			printf("\n\n----------------------------------------------------------------------------\n\n\n");
 			printf("*-*-*-*-*-*-               Registrar una Mascota                -*-*-*-*-*-*\n\n\n");
 			printf("----------------------------------------------------------------------------\n\n\n\n");
 			
-//			printf("Ingrese apellido y nombre: ");
-//			_flushall();
-//			gets(vet.apeNom);
+			printf("Ingrese nombre de la mascota y apellido del dueño: ");
+			_flushall();
+			gets(masc.apeNom);
 //			printf("Ingrese la matricula: ");
 //			scanf("%d", &vet.matricula);
 //			printf("Ingrese el DNI: ");
