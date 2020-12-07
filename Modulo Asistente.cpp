@@ -35,6 +35,22 @@ struct user {
 	char name[50];
 };
 
+struct fecha {
+	int dia;
+	int mes;
+	int year;
+};
+
+struct mascs {
+	char apeNom[50];
+	char domicilio[50];
+	int dniD;
+	char localidad[50];
+	fecha nacimiento;
+	float peso;
+	char tel[15];m
+};
+
 int opc=0;
 int err=0;
 bool logged = false;
@@ -189,24 +205,24 @@ logged = true;
 		if (mascots == NULL) {
 			printf ("ERROR: No se pudo abrir el archivo");
 		} else {
-			veterin vet;
+//			veterin vet;
 			printf("\n\n----------------------------------------------------------------------------\n\n\n");
 			printf("*-*-*-*-*-*-               Registrar una Mascota                -*-*-*-*-*-*\n\n\n");
 			printf("----------------------------------------------------------------------------\n\n\n\n");
 			
-			printf("Ingrese apellido y nombre: ");
-			_flushall();
-			gets(vet.apeNom);
-			printf("Ingrese la matricula: ");
-			scanf("%d", &vet.matricula);
-			printf("Ingrese el DNI: ");
-			scanf("%d", &vet.dni); 
-			printf("Ingrese el numero de telefono: ");
-			_flushall();
-			gets(vet.telefono);
-			fwrite(&vet, sizeof(veterin), 1, vets);
+//			printf("Ingrese apellido y nombre: ");
+//			_flushall();
+//			gets(vet.apeNom);
+//			printf("Ingrese la matricula: ");
+//			scanf("%d", &vet.matricula);
+//			printf("Ingrese el DNI: ");
+//			scanf("%d", &vet.dni); 
+//			printf("Ingrese el numero de telefono: ");
+//			_flushall();
+//			gets(vet.telefono);
+//			fwrite(&vet, sizeof(veterin), 1, vets);
 		}
-		fclose(vets);
+		fclose(mascots);
 		printf("\n\n");
 		system("pause");
 		menu();
