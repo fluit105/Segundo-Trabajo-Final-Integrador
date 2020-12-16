@@ -7,6 +7,7 @@
 #include <time.h>
 using namespace std;
 
+
 struct fecha {
   int dia;
   int mes;
